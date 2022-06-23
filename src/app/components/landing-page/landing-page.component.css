@@ -22,7 +22,7 @@ body{
 header{
     background: #005A5D;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #4816a0, #000000);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #005A5D,#03989E, #00C2CB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    background: linear-gradient(to right, #043E85,#599AEF, #93c2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
     height: auto;
     padding: 48px;
     width: 100%;
@@ -81,7 +81,7 @@ img{
     width: 100%;
     background: #4816a0;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #4816a0, #DA4453);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #005A5D,#03989E, #00C2CB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    background: linear-gradient(to right, #043E85,#599AEF, #93c2ff  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
 }
 
 .enlaces{
@@ -233,14 +233,14 @@ clip-path: circle(0% at 0 0);
     overflow-y: hidden;
   }
   nav {
-    background: #EFFEFF;
+    background: #252525;
     padding: 5px 20px;
   }
   ul {
     list-style-type: none;
   }
   a {
-    color: #222;
+    color: #fff;
     text-decoration: none;
   }
   .white{
@@ -268,7 +268,7 @@ clip-path: circle(0% at 0 0);
   }
 
   .button.secondary {
-    border-bottom: 1px #444 solid;
+    border-bottom: 1px #fff solid;
   }
   
   /* Mobile menu */
@@ -351,9 +351,10 @@ clip-path: circle(0% at 0 0);
     }
     .button a {
         padding: 7.5px 15px;
-        background: teal;
-        border: 1px #006d6d solid;
+        background: #599AEF;
+        border: 1px #599AEF solid;
         border-radius:50em;
+        color: #fff;
     }
     .button.secondary a {
         background: transparent;    
@@ -363,8 +364,8 @@ clip-path: circle(0% at 0 0);
         transition:all .25s;
     }
     .button:not(.secondary) a:hover {
-        background: #006d6d;
-        border-color: #005959;
+        background: #599AEF;
+        border-color: #599AEF;
     }
     .button.secondary a:hover {
         color: #ddd;
