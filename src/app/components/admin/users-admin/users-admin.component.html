@@ -1,0 +1,342 @@
+<!--TÍTULO DEL COMPONENTE-->
+<div class="head-title">
+    <div class="left">
+        <h1>
+            &nbsp;<i class="fa fa-users" aria-hidden="true"></i> Users
+        </h1>
+        <hr>
+    </div>
+</div>
+
+
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div *ngIf="!showTableUsers" class="form-input mt-5">
+    <input [(ngModel)]="searchUser" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+</div>
+<br>
+
+
+<!--BOTONES DE ACCESO RÁPIDO-->
+<div class="text-center mt-2 mb-2">
+    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#addUser">
+        <span class="icon">
+            <i class="fa fa-user" aria-hidden="true"></i>
+        </span>
+        <span class="text">Add User</span>
+    </button>
+    <button routerLink="/admin/home" class="btn btn-primary btn-icon-split">
+        <span class="icon">
+            <i class="fas fa-home"></i>
+        </span>
+        <span class="text">Back Home</span>
+    </button>
+    <button *ngIf="!showTableUsers" (click)="showTable()" class="btn btn-secondary btn-icon-split">
+        <span class="icon">
+            <i class="fa fa-table" aria-hidden="true"></i>
+        </span>
+        <span class="text">Table Users</span>
+    </button>
+    <button *ngIf="showTableUsers" (click)="showTable(); cleanTable();" class="btn btn-secondary btn-icon-split">
+        <span class="icon">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </span>
+        <span class="text">Return Cards</span>
+    </button>
+</div>
+<hr>
+
+
+<!--CARDS DE USERS-->
+<div *ngIf="!showTableUsers">
+    <div class="container">
+        <div class="products-container">
+            <div *ngFor="let user of users | searchUserPipe:searchUser" class="product" data-name="p-1">
+                <h5 class="card-title">{{user.name}} {{user.surname}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{user.username}}</h6>
+                <p class="card-text">{{ user.role }}</p>
+                <button (click)="getUser(user._id)" class="btn btn-success m-3" data-bs-toggle="modal"
+                    data-bs-target="#updateUser" class="btn btn-warning m-2">
+                    <i class="fa fa-pencil" aria-hidden="true">
+                    </i> Update
+                </button>
+                <button (click)="deleteUser(user._id)" class="btn btn-danger"> <i class="fa fa-trash"
+                        aria-hidden="true"></i>
+                    Delete
+                </button>
+                <button (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser"
+                    class=" btn btn-secondary ms-2"> <i class="fa fa-eye" aria-hidden="true"></i>
+                    View
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--MODAL ADD USER-->
+<div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-user" aria-hidden="true"></i>
+                    &nbsp; Add User:</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="saveUser(addUserForm)" #addUserForm="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="user.name" name="name" type="text" class="form-control" id="nameTeam"
+                            aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Surname</label>
+                        <input [(ngModel)]="user.surname" name="surname" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input [(ngModel)]="user.username" name="username" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input [(ngModel)]="user.password" name="password" type="password" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input [(ngModel)]="user.email" name="email" type="email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input [(ngModel)]="user.phone" name="phone" type="tel" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <select [(ngModel)]="user.role" name="role" class="form-select"
+                            aria-label="Default select example">
+                            <option disabled selected>Choose a Role</option>
+                            <option>CLIENT</option>
+                            <option>ADMIN HOTEL</option>
+                        </select>
+                    </div>
+                    <div class=" modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i> Save User
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL UPDATE USER -->
+<div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="updateUser" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true"></i>
+                    Update User:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form (ngSubmit)="updateUser()" *ngIf="userUpdate">
+                    <div class="mb-3">
+                        <label for="nameUpdate" class="form-label">Name</label>
+                        <input [(ngModel)]="userUpdate.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="surnameUpdate" class="form-label">Surname</label>
+                        <input [(ngModel)]="userUpdate.surname" name="surname" type="text" class="form-control"
+                            id="surnameUpdate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="surnameUpdate" class="form-label">Username</label>
+                        <input [(ngModel)]="userUpdate.username" name="username" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="usernameUpdate" class="form-label">Email</label>
+                        <input [(ngModel)]="userUpdate.email" name="email" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="usernameUpdate" class="form-label">Phone</label>
+                        <input [(ngModel)]="userUpdate.phone" name="phone" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <select [(ngModel)]="userUpdate.role" name="role" class="form-select"
+                            aria-label="Default select example">
+                            <option>CLIENT</option>
+                            <option>ADMIN HOTEL</option>
+                        </select>
+                    </div>
+                    <div class=" modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i> Update User
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL VIEW USER -->
+<div>
+    <div class="modal fade" id="viewUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div *ngIf="userView" class="modal-body">
+                    <div class="descripcion">
+                        <div class="count-container">
+
+                            <div class="box">
+                                <h3>Name:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{userView.name}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Surname:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{userView.surname}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Username:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{userView.username}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Email:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{userView.email}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Phone:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{userView.phone}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Role:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{userView.role}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--TABLE OF USERS-->
+<div *ngIf="showTableUsers" class="card shadow mb-4 mt-5">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold colorTable">Users Found</h6>
+    </div>
+
+    <div class="form-input-table mt-3 ms-auto">
+
+        <i *ngIf="userNameUp || userNameDown || userSurnameUp || userSurnameDown" (click)="cleanTable()"
+            class="fa fa-times-circle closeFilter mt-2" aria-hidden="true"></i>
+            <div class="dropdown">
+                <button class="btn dropdown-toggle drop" data-toggle="dropdown" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Search For:
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li (click)="getUsersClient()"><a class="dropdown-item">CLIENT</a></li>
+                    <li (click)="getUsersAdminHotel()"><a class="dropdown-item">ADMIN HOTEL</a></li>
+                    <li (click)="getUsers()"><a class="dropdown-item">All Users</a></li>
+                </ul>
+            </div>
+        <input class="input" [(ngModel)]="searchUser" placeholder="Search...">
+        <button type="submit" class="search-btn button"><i class='fa fa-search'></i>
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="cursor" *ngIf="!userNameUp && !userNameDown" (click)="getUsersByUp()">
+                            Name
+                            <i class="fa fa-sort-alpha-asc  text-gray-400 arrowsTable" aria-hidden="true"></i>
+                            <i class="fa fa-sort-alpha-desc text-gray-400 ms-3"></i>
+                        </th>
+                        <th class="cursor" *ngIf="userNameUp && !userNameDown" (click)="getUsersByDown()">
+                            Name
+                            <i class="fa fa-sort-alpha-asc arrowsTable" aria-hidden="true"></i>
+                            <i class="fa fa-sort-alpha-desc text-gray-400 ms-3"></i>
+                        </th>
+                        <th class="cursor" *ngIf="userNameDown" (click)="getUsersByUp()">
+                            Name
+                            <i class="fa fa-sort-alpha-asc  text-gray-400 arrowsTable" aria-hidden="true"></i>
+                            <i class="fa fa-sort-alpha-desc ms-3"></i>
+                        </th>
+                        <th class="cursor" *ngIf="!userSurnameUp && !userSurnameDown" (click)="getUsersSurnameByUp()">
+                            Surname
+                            <i class="fa fa-sort-alpha-asc  text-gray-400 arrowsTable" aria-hidden="true"></i>
+                            <i class="fa fa-sort-alpha-desc text-gray-400 ms-3"></i>
+                        </th>
+                        <th class="cursor" *ngIf="userSurnameUp && !userSurnameDown" (click)="getUsersSurnameByDown()">
+                            Surname
+                            <i class="fa fa-sort-alpha-asc arrowsTable" aria-hidden="true"></i>
+                            <i class="fa fa-sort-alpha-desc text-gray-400 ms-3"></i>
+                        </th>
+                        <th class="cursor" *ngIf="userSurnameDown" (click)="getUsersSurnameByUp()">
+                            Surname
+                            <i class="fa fa-sort-alpha-asc  text-gray-400 arrowsTable" aria-hidden="true"></i>
+                            <i class="fa fa-sort-alpha-desc ms-3"></i>
+                        </th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users | searchUserPipe:searchUser">
+                        <td>{{users.indexOf(user)+1}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.surname}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.phone}}</td>
+                        <td>{{user.role}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="body" [ngClass]="getBodyClass()">
+    <nav style="position: sticky;" class="navbar navbar2 navbar-expand navbar-light  topbar mb-4 static-top">
+
+        <!-- Topbar Navbar -->
+        <ul style="position: sticky;" class="navbar-nav ml-auto">
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline "></span>
+                    <img class="img-profile rounded-circle" src="../../../../assets/img/superadmin.jpg">
+                </a>
+                <!-- Dropdown - User Information -->
+                <div style="transform: translateY(-17px);" class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <button (click)="logOut()" class="dropdown-item" data-toggle="modal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <br>
+    <router-outlet></router-outlet>
+</div>

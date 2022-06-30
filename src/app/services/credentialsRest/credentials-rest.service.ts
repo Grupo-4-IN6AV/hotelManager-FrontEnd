@@ -15,7 +15,8 @@ export class CredentialsRestService
   ){ }
 
   //Solicitudes HTTP propias de la entidad Usuario
-  register(params: {}){
+  register(params: {})
+  {
     let body = JSON.stringify(params); //CONVERTIR A JSON
     return this.http.post(environment.baseURI + 'user/register', body, {headers: this.httpOptions});
   }
@@ -23,7 +24,7 @@ export class CredentialsRestService
   login(params: {})
   {
     let body = JSON.stringify(params); //CONVERTIR A JSON
-    return this.http.post(environment.baseURI + 'company/login', body, {headers: this.httpOptions});
+    return this.http.post(environment.baseURI + 'user/login', body, {headers: this.httpOptions});
   }
 
   getToken(){
