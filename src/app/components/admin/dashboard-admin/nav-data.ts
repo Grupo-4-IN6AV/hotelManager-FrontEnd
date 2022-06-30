@@ -10,9 +10,9 @@ export const navbarData = [
         label: 'Users'
     },
     {
-        routeLink: 'townships',
-        icon: 'fa fa-map-marker',
-        label: 'TownShips'
+        routeLink: 'hotels',
+        icon: 'fa fa-building',
+        label: 'Hotels'
     },
     {
         routeLink: 'typeCompany',

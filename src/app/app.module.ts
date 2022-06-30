@@ -15,6 +15,7 @@ import { SetComponentsAdminComponent } from './components/admin/set-components-a
 import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
 import { UsersAdminComponent } from './components/admin/users-admin/users-admin.component';
 import { SearchUserPipe } from './pipes/userPipe/search-user.pipe';
+import { HotelsAdminComponent } from './components/admin/hotels-admin/hotels-admin.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SearchUserPipe } from './pipes/userPipe/search-user.pipe';
     HomeAdminComponent,
     UsersAdminComponent,
     SearchUserPipe,
+    HotelsAdminComponent,
   ],
   imports: [
     BrowserModule,

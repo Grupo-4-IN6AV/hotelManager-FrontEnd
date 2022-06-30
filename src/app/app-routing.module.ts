@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
+import { HotelsAdminComponent } from './components/admin/hotels-admin/hotels-admin.component';
 import { SetComponentsAdminComponent } from './components/admin/set-components-admin/set-components-admin.component';
 import { UsersAdminComponent } from './components/admin/users-admin/users-admin.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
@@ -20,6 +21,7 @@ const routes: Routes =
     [
       { path: 'home', component: HomeAdminComponent},
       { path: 'users', component: UsersAdminComponent},
+      { path: 'hotels', component: HotelsAdminComponent},
     ]
   },
 ];
