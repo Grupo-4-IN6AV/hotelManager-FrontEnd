@@ -16,6 +16,8 @@ import { HomeAdminComponent } from './components/admin/home-admin/home-admin.com
 import { UsersAdminComponent } from './components/admin/users-admin/users-admin.component';
 import { SearchUserPipe } from './pipes/userPipe/search-user.pipe';
 import { HotelsAdminComponent } from './components/admin/hotels-admin/hotels-admin.component';
+import { ServicesAdminComponent } from './components/admin/services-admin/services-admin.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { HotelsAdminComponent } from './components/admin/hotels-admin/hotels-adm
     UsersAdminComponent,
     SearchUserPipe,
     HotelsAdminComponent,
+    ServicesAdminComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,

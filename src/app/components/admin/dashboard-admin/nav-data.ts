@@ -15,9 +15,9 @@ export const navbarData = [
         label: 'Hotels'
     },
     {
-        routeLink: 'typeCompany',
-        icon: 'fas fa-store',
-        label: 'Type Companies'
+        routeLink: 'services',
+        icon: 'fa fa-bell-concierge',
+        label: 'Services'
     },
     {
         routeLink: 'products',
