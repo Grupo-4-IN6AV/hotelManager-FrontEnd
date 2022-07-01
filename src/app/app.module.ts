@@ -21,6 +21,7 @@ import { ServicesAdminComponent } from './components/admin/services-admin/servic
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { EventsAdminComponent } from './components/admin/events-admin/events-admin.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
     NotFoundPageComponent,
     AboutUsComponent,
     ContactUsComponent,
+    EventsAdminComponent,
   ],
   imports: [
     BrowserModule,
