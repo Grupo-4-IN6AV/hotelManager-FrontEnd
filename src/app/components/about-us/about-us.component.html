@@ -1,8 +1,41 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!-- Nav Bar -->
+<header class="navBar">
+    <div class="boxNavbar">
+        <input type="checkbox" name="" id="check">
 
+        <div class="logo-container">
+            <h3 class="logo">Manager <span>Hotels</span></h3>
+        </div>
+
+        <div class="nav-btn">
+            <div class="nav-links">
+                <ul>
+                    <li class="nav-link" style="--i: .6s">
+                        <a routerLink="">Home</a>
+                    </li>
+                    <li class="nav-link nav-link-active" style="--i: 1s">
+                        <a routerLink="/aboutUs" class="active">About Us</a>
+                    </li>
+                    <li class="nav-link" style="--i: 1.35s">
+                        <a routerLink="/contactUs">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="log-sign" style="--i: 1.8s">
+                <a routerLink="/login" class="btn transparent">Log in</a>
+                <a routerLink="/register" class="btn solid">Sign up</a>
+            </div>
+        </div>
+
+        <div class="hamburger-menu-container">
+            <div class="hamburger-menu">
+                <div></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ABOUT US -->
 <!--ABOUT US PAGE-->
 
 <div class="image-aboutus-banner">
@@ -10,7 +43,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="lg-text">About Us</h1>
-                <p class="image-aboutus-para">Conoce los mejores hoteles de la región</p>
+                <p class="image-aboutus-para">Meet the best hotels in the region</p>
             </div>
         </div>
     </div>
@@ -48,154 +81,95 @@
             <div class="border"></div>
         </div>
     </div>
-    <div class="row cards">
-        <div class="col-md-4 team-box mb-4">
-            <div class="team-img thumbnail">
-                <img
-                    src="../../../assets/images/aboutUs/Rodrigo.jpg">
-                <div class="team-content">
-                    <h3>Rodrigo Cárdenas</h3>
-                    <div class="border-team"></div>
-                    <p>Coordinator and developer of our application</p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/"><i id="social-fb"
-                                class="fa fa-facebook-square fa-3x social"></i></a>
-                        <a href="https://twitter.com/"><i id="social-tw"
-                                class="fa fa-twitter-square fa-3x social"></i></a>
-                        <a href="https://plus.google.com/"><i id="social-gp"
-                                class="fa fa-google-plus-square fa-3x social"></i></a>
-                        <a href="mailto:bootsnipp@gmail.com"><i id="social-em"
-                                class="fa fa-envelope-square fa-3x social"></i></a>
+    <section id="team">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="../../../assets/images/aboutUs/Rodrigo.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Rodrigo Cardenas</h5>
+                        <p>Developer</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="../../../assets/images/aboutUs/Samuel.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Samuel Escobar</h5>
+                        <p>Developer</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="../../../assets/images/aboutUs/Mynor.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Mynor Lopez</h5>
+                        <p>Developer</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="../../../assets/images/aboutUs/Santiago.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Santiago Lopez</h5>
+                        <p>Developer</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="../../../assets/images/aboutUs/Javier.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Javier Linares</h5>
+                        <p>Developer</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="../../../assets/images/aboutUs/Ixpatack.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Sduard Ixpatac</h5>
+                        <p>Developer</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-member card-effect">
+                        <img src="../../../assets/images/aboutUs/Juarez.jpg" alt="">
+                        <h5 class="mb-0 mt-4">Daniel Juarez</h5>
+                        <p>Developer</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 team-box">
-            <div class="team-img thumbnail">
-                <img
-                    src="../../../assets/images/aboutUs/Samuel.jpg">
-                <div class="team-content">
-                    <h3>Samuel Escobar</h3>
-                    <div class="border-team"></div>
-                    <p>Developer of our application</p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/"><i id="social-fb"
-                                class="fa fa-facebook-square fa-3x social"></i></a>
-                        <a href="https://twitter.com/"><i id="social-tw"
-                                class="fa fa-twitter-square fa-3x social"></i></a>
-                        <a href="https://plus.google.com/"><i id="social-gp"
-                                class="fa fa-google-plus-square fa-3x social"></i></a>
-                        <a href="mailto:bootsnipp@gmail.com"><i id="social-em"
-                                class="fa fa-envelope-square fa-3x social"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 team-box">
-            <div class="team-img thumbnail">
-                <img
-                    src="../../../assets/images/aboutUs/Ixpatack.jpg">
-                <div class="team-content">
-                    <h3>Sduard Ixpatac</h3>
-                    <div class="border-team"></div>
-                    <p>Developer of our application</p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/"><i id="social-fb"
-                                class="fa fa-facebook-square fa-3x social"></i></a>
-                        <a href="https://twitter.com/"><i id="social-tw"
-                                class="fa fa-twitter-square fa-3x social"></i></a>
-                        <a href="https://plus.google.com/"><i id="social-gp"
-                                class="fa fa-google-plus-square fa-3x social"></i></a>
-                        <a href="mailto:bootsnipp@gmail.com"><i id="social-em"
-                                class="fa fa-envelope-square fa-3x social"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 team-box">
-            <div class="team-img thumbnail">
-                <img
-                    src="../../../assets/images/aboutUs/Juarez.jpg">
-                <div class="team-content">
-                    <h3>Daniel Juarez</h3>
-                    <div class="border-team"></div>
-                    <p>Developer of our application</p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/"><i id="social-fb"
-                                class="fa fa-facebook-square fa-3x social"></i></a>
-                        <a href="https://twitter.com/"><i id="social-tw"
-                                class="fa fa-twitter-square fa-3x social"></i></a>
-                        <a href="https://plus.google.com/"><i id="social-gp"
-                                class="fa fa-google-plus-square fa-3x social"></i></a>
-                        <a href="mailto:bootsnipp@gmail.com"><i id="social-em"
-                                class="fa fa-envelope-square fa-3x social"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 team-box">
-            <div class="team-img thumbnail">
-                <img
-                    src="../../../assets/images/aboutUs/Javier.jpg">
-                <div class="team-content">
-                    <h3>Javier Linares</h3>
-                    <div class="border-team"></div>
-                    <p>Developer of our application</p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/"><i id="social-fb"
-                                class="fa fa-facebook-square fa-3x social"></i></a>
-                        <a href="https://twitter.com/"><i id="social-tw"
-                                class="fa fa-twitter-square fa-3x social"></i></a>
-                        <a href="https://plus.google.com/"><i id="social-gp"
-                                class="fa fa-google-plus-square fa-3x social"></i></a>
-                        <a href="mailto:bootsnipp@gmail.com"><i id="social-em"
-                                class="fa fa-envelope-square fa-3x social"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 team-box">
-            <div class="team-img thumbnail">
-                <img
-                    src="../../../assets/images/aboutUs/Mynor.jpg">
-                <div class="team-content">
-                    <h3>Mynor López</h3>
-                    <div class="border-team"></div>
-                    <p>Developer of our application</p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/"><i id="social-fb"
-                                class="fa fa-facebook-square fa-3x social"></i></a>
-                        <a href="https://twitter.com/"><i id="social-tw"
-                                class="fa fa-twitter-square fa-3x social"></i></a>
-                        <a href="https://plus.google.com/"><i id="social-gp"
-                                class="fa fa-google-plus-square fa-3x social"></i></a>
-                        <a href="mailto:bootsnipp@gmail.com"><i id="social-em"
-                                class="fa fa-envelope-square fa-3x social"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 team-box mt-4">
-            <div class="team-img thumbnail">
-                <img
-                    src="../../../assets/images/aboutUs/Santiago.jpg">
-                <div class="team-content">
-                    <h3>Santiago López</h3>
-                    <div class="border-team"></div>
-                    <p>Developer of our application</p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/"><i id="social-fb"
-                                class="fa fa-facebook-square fa-3x social"></i></a>
-                        <a href="https://twitter.com/"><i id="social-tw"
-                                class="fa fa-twitter-square fa-3x social"></i></a>
-                        <a href="https://plus.google.com/"><i id="social-gp"
-                                class="fa fa-google-plus-square fa-3x social"></i></a>
-                        <a href="mailto:bootsnipp@gmail.com"><i id="social-em"
-                                class="fa fa-envelope-square fa-3x social"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </section><!-- TEAM -->
 
-    </div>
 </div>
