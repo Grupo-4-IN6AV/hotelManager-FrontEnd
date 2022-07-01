@@ -3,6 +3,7 @@ import { ContactModel } from '../../models/contact.model'
 import { ContactUsRestService } from 'src/app/services/contactUsRest/contact-us-rest.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { CargarScriptsService } from 'src/app/cargar-scripts.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -15,9 +16,11 @@ export class ContactUsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private ContactUsRest: ContactUsRestService
+    private ContactUsRest: ContactUsRestService,
+    private _CargarScripts: CargarScriptsService
   ) {
     this.contact = new ContactModel('', '', '', '');
+    _CargarScripts.Carga(["burguerMenu"]);
   }
 
   ngOnInit(): void {
