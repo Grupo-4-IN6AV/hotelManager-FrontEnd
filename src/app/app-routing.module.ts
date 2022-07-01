@@ -6,6 +6,7 @@ import { HotelsAdminComponent } from './components/admin/hotels-admin/hotels-adm
 import { ServicesAdminComponent } from './components/admin/services-admin/services-admin.component';
 import { SetComponentsAdminComponent } from './components/admin/set-components-admin/set-components-admin.component';
 import { UsersAdminComponent } from './components/admin/users-admin/users-admin.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
@@ -17,6 +18,7 @@ const routes: Routes =
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'aboutUs', component: AboutUsComponent},
+  {path: 'contactUs', component: ContactUsComponent},
 
   //CONTROL DE RUTAS DE ADMIN//
   {
