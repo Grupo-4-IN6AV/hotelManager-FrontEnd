@@ -1,0 +1,290 @@
+<!--TÍTULO DEL COMPONENTE-->
+<div class="head-title">
+    <div class="left">
+        <h1>
+            &nbsp;<i class="fa fa-building" aria-hidden="true"></i> Hotels
+        </h1>
+        <hr>
+    </div>
+</div>
+
+
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div *ngIf="!showTableHotels" class="form-input mt-5">
+    <input [(ngModel)]="searchHotel" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+</div>
+<br>
+
+
+<!--BOTONES DE ACCESO RÁPIDO-->
+<div class="text-center mt-2 mb-2">
+    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#addHotel">
+        <span class="icon">
+            <i class="fa fa-building" aria-hidden="true"></i>
+        </span>
+        <span class="text">Add Hotel</span>
+    </button>
+    <button routerLink="/admin/home" class="btn btn-primary btn-icon-split">
+        <span class="icon">
+            <i class="fas fa-home"></i>
+        </span>
+        <span class="text">Back Home</span>
+    </button>
+    <button *ngIf="!showTableHotels" (click)="showTable()" class="btn btn-secondary btn-icon-split">
+        <span class="icon">
+            <i class="fa fa-table" aria-hidden="true"></i>
+        </span>
+        <span class="text">Table Hotels</span>
+    </button>
+    <button *ngIf="showTableHotels" (click)="showTable()" class="btn btn-secondary btn-icon-split">
+        <span class="icon">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </span>
+        <span class="text">Return Cards</span>
+    </button>
+</div>
+<hr>
+
+
+<!--CARDS DE HOTELS-->
+<div *ngIf="!showTableHotels">
+    <div class="container">
+        <div class="products-container">
+            <div *ngFor="let hotel of hotels | searchUserPipe:searchHotel" class="product" data-name="p-1">
+                <h5 class="card-title">{{hotel.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{hotel.address}}</h6>
+                <p class="card-text">{{ hotel.admin.name }} {{ hotel.admin.surname }}</p>
+                <button (click)="getHotel(hotel._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateHotel"
+                    class="btn btn-warning m-2">
+                    <i class="fa fa-pencil" aria-hidden="true">
+                    </i> Update
+                </button>
+                <button (click)="deleteHotel(hotel._id)" class="btn btn-danger"> <i class="fa fa-trash"
+                        aria-hidden="true"></i>
+                    Delete
+                </button>
+                <button (click)="getHotel(hotel._id)" data-bs-toggle="modal" data-bs-target="#viewHotel"
+                    class=" btn btn-secondary ms-2"> <i class="fa fa-eye" aria-hidden="true"></i>
+                    View
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--MODAL ADD HOTEL-->
+<div class="modal fade" id="addHotel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-building" aria-hidden="true"></i>
+                    &nbsp; Add Hotel:</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="saveHotel(addHotelForm)" #addHotelForm="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="hotel.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input [(ngModel)]="hotel.description" name="description" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <input [(ngModel)]="hotel.address" name="address" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input [(ngModel)]="hotel.email" name="password" type="email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input [(ngModel)]="hotel.phone" name="email" type="tel" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Administrator</label>
+                        <select [(ngModel)]="hotel.admin" name="role" class="form-select"
+                            aria-label="Default select example">
+                            <option disabled value="" selected>Choose a Administrator</option>
+                            <option *ngFor="let user of users" value="{{user._id}}">
+                                {{user.name}} {{user.surname}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class=" modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i> Save Hotel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL UPDATE HOTEL -->
+<div class="modal fade" id="updateHotel" tabindex="-1" aria-labelledby="updateUser" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true"></i>
+                    Update Hotel:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form (ngSubmit)="updateHotel()" *ngIf="hotelUpdate">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="hotelUpdate.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input [(ngModel)]="hotelUpdate.description" name="description" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <input [(ngModel)]="hotelUpdate.address" name="username" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input [(ngModel)]="hotelUpdate.email" name="email" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input [(ngModel)]="hotelUpdate.phone" name="phone" type="text" class="form-control">
+                    </div>
+                    <div class=" modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i> Update Hotel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- MODAL VIEW HOTEL -->
+<div>
+    <div class="modal fade" id="viewHotel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div *ngIf="hotelView" class="modal-body">
+                    <div class="descripcion">
+                        <div class="count-container">
+
+                            <div class="box">
+                                <h3>Name:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{hotelView.name}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Description:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{hotelView.description}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Address:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{hotelView.address}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Email:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{hotelView.email}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Phone:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{hotelView.phone}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Administrator:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{hotelView.admin.name}}
+                                    {{hotelView.admin.surname}}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--TABLE OF HOTELS-->
+<div *ngIf="showTableHotels" class="card shadow mb-4 mt-5">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold colorTable">Users Found</h6>
+    </div>
+
+    <div class="form-input-table mt-3 ms-auto">
+        <input class="input" [(ngModel)]="searchHotel" placeholder="Search...">
+        <button type="submit" class="search-btn button"><i class='fa fa-search'></i>
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Administrator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let hotel of hotels | searchUserPipe:searchHotel">
+                        <td>{{hotels.indexOf(hotel)+1}}</td>
+                        <td>{{hotel.name}}</td>
+                        <td>{{hotel.description}}</td>
+                        <td>{{hotel.address}}</td>
+                        <td>{{hotel.email}}</td>
+                        <td>{{hotel.phone}}</td>
+                        <td>{{hotel.admin.name}} {{hotel.admin.surname}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

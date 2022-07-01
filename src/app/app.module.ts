@@ -1,17 +1,46 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { BodyAdminComponent } from './components/admin/body-admin/body-admin.component';
+import { DashboardAdminComponent } from './components/admin/dashboard-admin/dashboard-admin.component';
+import { SetComponentsAdminComponent } from './components/admin/set-components-admin/set-components-admin.component';
+import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
+import { UsersAdminComponent } from './components/admin/users-admin/users-admin.component';
+import { SearchUserPipe } from './pipes/userPipe/search-user.pipe';
+import { HotelsAdminComponent } from './components/admin/hotels-admin/hotels-admin.component';
+import { ServicesAdminComponent } from './components/admin/services-admin/services-admin.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
+    RegisterComponent,
+    LoginComponent,
+    BodyAdminComponent,
+    DashboardAdminComponent,
+    SetComponentsAdminComponent,
+    HomeAdminComponent,
+    UsersAdminComponent,
+    SearchUserPipe,
+    HotelsAdminComponent,
+    ServicesAdminComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
