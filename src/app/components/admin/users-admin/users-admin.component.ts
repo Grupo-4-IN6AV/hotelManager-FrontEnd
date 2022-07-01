@@ -88,7 +88,6 @@ export class UsersAdminComponent implements OnInit
   {
     this.userUpdate.password = undefined;
     this.userRest.updateUser(this.userUpdate._id, this.userUpdate).subscribe({
-
       next: (res:any)=> 
       {
         Swal.fire({

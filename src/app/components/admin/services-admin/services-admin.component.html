@@ -7,3 +7,243 @@
         <hr>
     </div>
 </div>
+
+
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div *ngIf="!showTableServices" class="form-input mt-5">
+    <input [(ngModel)]="searchService" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+</div>
+<br>
+
+
+<!--BOTONES DE ACCESO RÁPIDO-->
+<div class="text-center mt-2 mb-2">
+    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#addService">
+        <span class="icon">
+            <i class="fa fa-bell-concierge" aria-hidden="true"></i>
+        </span>
+        <span class="text">Add Service</span>
+    </button>
+    <button routerLink="/admin/home" class="btn btn-primary btn-icon-split">
+        <span class="icon">
+            <i class="fas fa-home"></i>
+        </span>
+        <span class="text">Back Home</span>
+    </button>
+    <button *ngIf="!showTableServices" (click)="showTable()" class="btn btn-secondary btn-icon-split">
+        <span class="icon">
+            <i class="fa fa-table" aria-hidden="true"></i>
+        </span>
+        <span class="text">Table Services</span>
+    </button>
+    <button *ngIf="showTableServices" (click)="showTable()" class="btn btn-secondary btn-icon-split">
+        <span class="icon">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </span>
+        <span class="text">Return Cards</span>
+    </button>
+</div>
+<hr>
+
+
+<!--CARDS DE SERVICES-->
+<div *ngIf="!showTableServices">
+    <div class="container">
+        <div class="products-container">
+            <div *ngFor="let service of services | searchUserPipe:searchService" class="product" data-name="p-1">
+                <h5 class="card-title">{{service.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Q.{{newPrices[services.indexOf(service)]}}</h6>
+                <p class="card-text">{{ service.hotel.name }}</p>
+                <button (click)="getService(service._id)" class="btn btn-success m-3" data-bs-toggle="modal"
+                    data-bs-target="#updateService" class="btn btn-warning m-2">
+                    <i class="fa fa-pencil" aria-hidden="true">
+                    </i> Update
+                </button>
+                <button (click)="deleteService(service._id)" class="btn btn-danger"> <i class="fa fa-trash"
+                        aria-hidden="true"></i>
+                    Delete
+                </button>
+                <button (click)="getService(service._id)" data-bs-toggle="modal" data-bs-target="#viewService"
+                    class=" btn btn-secondary ms-2"> <i class="fa fa-eye" aria-hidden="true"></i>
+                    View
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--MODAL ADD SERVICE-->
+<div class="modal fade" id="addService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-bell-concierge" aria-hidden="true"></i>
+                    &nbsp; Add Service:</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="saveService(addServiceForm)" #addServiceForm="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="service.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input [(ngModel)]="service.description" name="description" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input [(ngModel)]="service.price" name="price" type="number" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hotel</label>
+                        <select [(ngModel)]="service.hotel" name="hotel" class="form-select"
+                            aria-label="Default select example">
+                            <option disabled value="" selected>Choose a Hotel</option>
+                            <option *ngFor="let hotel of hotels" value="{{hotel._id}}">{{hotel.name}}</option>
+                        </select>
+                    </div>
+                    <div class=" modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i> Save Service
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL UPDATE SERVICE -->
+<div class="modal fade" id="updateService" tabindex="-1" aria-labelledby="updateUser" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true"></i>
+                    Update Service:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form (ngSubmit)="updateService()" *ngIf="serviceUpdate">
+                    <div class="mb-3">
+                        <label for="nameUpdate" class="form-label">Name</label>
+                        <input [(ngModel)]="serviceUpdate.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="surnameUpdate" class="form-label">Description</label>
+                        <input [(ngModel)]="serviceUpdate.description" name="description" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="surnameUpdate" class="form-label">Price</label>
+                        <input [(ngModel)]="serviceUpdate.price" name="price" type="text" class="form-control">
+                    </div>
+                    <div class=" modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i> Update Service
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL VIEW SERVICE -->
+<div>
+    <div class="modal fade" id="viewService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div *ngIf="serviceView" class="modal-body">
+                    <div class="descripcion">
+                        <div class="count-container">
+
+                            <div class="box">
+                                <h3>Name:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{serviceView.name}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Description:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{serviceView.description}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Price:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>Q.{{newPrice}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Hotel:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{serviceView.hotel.name}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--TABLE OF SERVICES-->
+<div *ngIf="showTableServices" class="card shadow mb-4 mt-5">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold colorTable">Services Found</h6>
+    </div>
+
+    <div class="form-input-table mt-3 ms-auto">
+        <input class="input" [(ngModel)]="searchService" placeholder="Search...">
+        <button type="submit" class="search-btn button"><i class='fa fa-search'></i>
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Hotel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let service of services | searchUserPipe:searchService">
+                        <td>{{services.indexOf(service)+1}}</td>
+                        <td>{{service.name}}</td>
+                        <td>{{service.description}}</td>
+                        <td>Q. {{newPrices[services.indexOf(service)]}}</td>
+                        <td>{{service.hotel.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
