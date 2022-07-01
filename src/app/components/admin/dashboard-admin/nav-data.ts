@@ -20,9 +20,9 @@ export const navbarData = [
         label: 'Services'
     },
     {
-        routeLink: 'products',
-        icon: 'fas fa-shopping-bag',
-        label: 'Products'
+        routeLink: 'events',
+        icon: 'fas fa-calendar',
+        label: 'Events'
     },
     {
         routeLink: 'branches',

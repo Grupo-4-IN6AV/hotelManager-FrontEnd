@@ -1,0 +1,122 @@
+<!--TÍTULO DEL COMPONENTE-->
+<div class="head-title">
+    <div class="left">
+        <h1>
+            &nbsp;<i class="fas fa-calendar" aria-hidden="true"></i> Events
+        </h1>
+        <hr>
+    </div>
+</div>
+
+
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div *ngIf="!showTableEvents" class="form-input mt-5">
+    <input [(ngModel)]="searchEvent" placeholder="Search...">
+    <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+</div>
+<br>
+
+
+<!--BOTONES DE ACCESO RÁPIDO-->
+<div class="text-center mt-2 mb-2">
+    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#addEvent">
+        <span class="icon">
+            <i class="fas fa-calendar" aria-hidden="true"></i>
+        </span>
+        <span class="text">Add Event</span>
+    </button>
+    <button routerLink="/admin/home" class="btn btn-primary btn-icon-split">
+        <span class="icon">
+            <i class="fas fa-home"></i>
+        </span>
+        <span class="text">Back Home</span>
+    </button>
+    <button *ngIf="!showTableEvents" (click)="showTable()" class="btn btn-secondary btn-icon-split">
+        <span class="icon">
+            <i class="fa fa-table" aria-hidden="true"></i>
+        </span>
+        <span class="text">Table Events</span>
+    </button>
+    <button *ngIf="showTableEvents" (click)="showTable()" class="btn btn-secondary btn-icon-split">
+        <span class="icon">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </span>
+        <span class="text">Return Cards</span>
+    </button>
+</div>
+<hr>
+
+
+<!--CARDS DE EVENTS-->
+<div *ngIf="!showTableEvents">
+    <div class="container">
+        <div class="products-container">
+            <div *ngFor="let event of events | searchUserPipe:searchEvent" class="product" data-name="p-1">
+                <h5 class="card-title">{{event.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{newDates[events.indexOf(event)]}}</h6>
+                <p class="card-text">{{ event.hotel.name }}</p>
+                <button class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateEvent"
+                    class="btn btn-warning m-2">
+                    <i class="fa fa-pencil" aria-hidden="true">
+                    </i> Update
+                </button>
+                <button class="btn btn-danger"> <i class="fa fa-trash"
+                        aria-hidden="true"></i>
+                    Delete
+                </button>
+                <button data-bs-toggle="modal" data-bs-target="#viewEvent"
+                    class=" btn btn-secondary ms-2"> <i class="fa fa-eye" aria-hidden="true"></i>
+                    View
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--MODAL ADD EVENT-->
+<div class="modal fade" id="addEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-calendar" aria-hidden="true"></i>
+                    &nbsp; Add Event:</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="saveEvent(eventAddForm)" #eventAddForm="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="event.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input [(ngModel)]="event.description" name="description" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Date</label>
+                        <input [(ngModel)]="event.date" name="date" type="date" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hotel</label>
+                        <select [(ngModel)]="event.hotel" name="hotel" class="form-select"
+                            aria-label="Default select example">
+                            <option disabled value="" selected>Choose a Hotel</option>
+                            <option *ngFor="let hotel of hotels" value="{{hotel._id}}">
+                                {{hotel.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class=" modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i> Save Event
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
