@@ -1,6 +1,12 @@
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  
   
   .error-svg {
-    display: block;
+    display: rela tive;
+    z-index: 0;
   }
 
   // Animations
@@ -132,11 +138,73 @@
     90% {transform: translate(-7.75%, 50px)}
     100% {transform: translate(0, 0)}
   }
-  
+
   #errrSVG
   {
-    min-height: 100vh;
-    max-height: 100%;
-    min-width: 100vw;
-    max-width: 100%;
+    min-height: 100%;
+    max-height: 100vh;
+    min-width: 100%;
+    max-width: 100vw;
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
+.buttons{
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons .button-Sec1, .button-Sec2{
+  z-index: 7000;
+  position: absolute;
+}
+
+.fa-solid{
+  font-size: 15px;
+  padding: 0 5px;
+}
+
+.buttons .button-Sec1{
+  width: 130px;
+  height: 40px;
+  transform: translate(1100px, 250px) rotate(-30deg) skew(25deg);
+  transition: 300ms;
+  text-decoration: none;
+  border: none;
+}
+
+.buttons .button-Sec2{
+  width: 130px;
+  height: 40px;
+  transform: translate(900px, 370px)  rotate(-30deg) skew(25deg);
+  transition: 300ms;
+  text-decoration: none;
+  border: none;
+}
+
+button:before,
+button:after {
+  content: '';
+  position: absolute;
+  background: #b1b1b1;
+  transition: 300ms;
+}
+button:before {
+  top:10px;
+  left:-20px;
+  height:100%;
+  width:20px;
+  transform: rotate(0deg) skewY(-45deg);
+}
+button:after {
+  bottom:-20px;
+  left:-10px;
+  height:20px;
+  width:100%;
+  transform: rotate(0deg) skewX(-45deg);
+}
+
+button:hover{
+  transform: rotate(-20deg) skew(15deg) translate(1px,-1px);
+  box-shadow: -20px 20px 20px rgba(0,0,0,.5);
+}
