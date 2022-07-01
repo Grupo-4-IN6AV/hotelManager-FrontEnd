@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { HotelsAdminComponent } from './components/admin/hotels-admin/hotels-adm
 import { ServicesAdminComponent } from './components/admin/services-admin/services-admin.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     ServicesAdminComponent,
     NotFoundPageComponent,
     AboutUsComponent,
+    ContactUsComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
