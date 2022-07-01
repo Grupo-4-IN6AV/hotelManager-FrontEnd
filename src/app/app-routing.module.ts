@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
 import { HotelsAdminComponent } from './components/admin/hotels-admin/hotels-admin.component';
 import { ServicesAdminComponent } from './components/admin/services-admin/services-admin.component';
@@ -15,6 +16,7 @@ const routes: Routes =
   {path: '', component: LandingPageComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'aboutUs', component: AboutUsComponent},
 
   //CONTROL DE RUTAS DE ADMIN//
   {
