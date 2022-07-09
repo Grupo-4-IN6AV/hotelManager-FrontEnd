@@ -1,0 +1,228 @@
+<!--TÍTULO DEL COMPONENTE-->
+<div class="head-title">
+    <div class="left">
+        <h1>
+            &nbsp;<i class="fa fa-building" aria-hidden="true"></i> Type Room
+        </h1>
+        <hr>
+    </div>
+</div>
+
+
+<!-- DESPLIEGA LA BÚSQUEDA -->
+<div *ngIf="showButtons">
+    <div *ngIf="!showTableTypeRooms" class="form-input mt-5">
+        <input [(ngModel)]="searchTypeRoom" placeholder="Search...">
+        <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+    </div>
+    <br>
+</div>
+
+<div *ngIf="showHotels">
+    <div *ngIf="!showTableTypeRooms" class="form-input mt-5">
+        <input [(ngModel)]="searchHotel" placeholder="Search...">
+        <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+    </div>
+    <br>
+</div>
+
+
+
+<!--BOTONES DE ACCESO RÁPIDO-->
+<div class="text-center mt-2 mb-2"  *ngIf="showButtons">
+    <button class="btn btn-success btn-icon-split" data-bs-toggle="modal" data-bs-target="#addTypeRom">
+        <span class="icon">
+            <i class="fa fa-building" aria-hidden="true"></i>
+        </span>
+        <span class="text">Add TypeRoom</span>
+    </button>
+    <button routerLink="/admin/home" class="btn btn-primary btn-icon-split">
+        <span class="icon">
+            <i class="fas fa-home"></i>
+        </span>
+        <span class="text">Back Home</span>
+    </button>
+    <button *ngIf="!showTableTypeRooms" (click)="showTable()" class="btn btn-secondary btn-icon-split">
+        <span class="icon">
+            <i class="fa fa-table" aria-hidden="true"></i>
+        </span>
+        <span class="text">Table TypeRoom</span>
+    </button>
+    <button *ngIf="showTableTypeRooms" (click)="showTable()" class="btn btn-secondary btn-icon-split">
+        <span class="icon">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </span>
+        <span class="text">Return Cards</span>
+    </button>
+</div>
+<hr *ngIf="showButtons">
+
+<!--CARDS DE HOTELS-->
+<div *ngIf="showHotels">
+    <div class="container">
+        <div class="products-container">
+            <div *ngFor="let hotel of hotels | searchUserPipe:searchHotel" class="product" data-name="p-1">
+                <h5 class="card-title">{{hotel.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{hotel.address}}</h6>
+                <p class="card-text">{{ hotel.admin.name }} {{ hotel.admin.surname }}</p>
+                <button (click)="getHotel(hotel._id)" class="btn btn-success m-3" data-bs-toggle="modal"
+                    data-bs-target="#updateHotel" class="btn btn-warning m-2">
+                    <i class="fa fa-pencil" aria-hidden="true">
+                    </i> Type Room
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--CARDS DE TYPEROOM-->
+<div *ngIf="showButtons">
+    <div class="container">
+        <div class="products-container">
+            <div *ngFor="let typeRoom of typeRooms | searchUserPipe:searchTypeRoom" class="product" data-name="p-1">
+                <h5 class="card-title">{{typeRoom.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{typeRoom.description}}</h6>
+                <button (click)="getTypeRoom(typeRoom._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateTypeRoom"
+                    class="btn btn-warning m-2">
+                    <i class="fa fa-pencil" aria-hidden="true">
+                    </i> Update
+                </button>
+                <button (click)="deleteTypeRoom(typeRoom._id)" class="btn btn-danger"> <i class="fa fa-trash"
+                        aria-hidden="true"></i>
+                    Delete
+                </button>
+                <button (click)="getTypeRoom(typeRoom._id)" data-bs-toggle="modal" data-bs-target="#viewTypeRoom"
+                    class=" btn btn-secondary ms-2"> <i class="fa fa-eye" aria-hidden="true"></i>
+                    View
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL ADD TYPEROOM-->
+<div class="modal fade" id="addTypeRom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-building" aria-hidden="true"></i>
+                    &nbsp; Add Type Room</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="saveTypeRoom(addTypeRoomForm)" #addTypeRoomForm="ngForm">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="typeRoom.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input [(ngModel)]="typeRoom.description" name="description" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Number Persons</label>
+                        <input [(ngModel)]="typeRoom.numberPersons" name="numberPersons" type="text"
+                            class="form-control">
+                    </div>
+                    <div class=" modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Save</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i> Save TypeRoom
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL UPDATE TypeRom -->
+<div class="modal fade" id="updateTypeRoom" tabindex="-1" aria-labelledby="updateUser" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pencil" aria-hidden="true"></i>
+                    Update Type Room</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form (ngSubmit)="updateTypeRoom()" *ngIf="typeRoomUpdate">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input [(ngModel)]="typeRoomUpdate.name" name="name" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input [(ngModel)]="typeRoomUpdate.description" name="description" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Number Persons</label>
+                        <input [(ngModel)]="typeRoomUpdate.numberPersons" name="numberPersons" type="text" class="form-control">
+                    </div>
+                    <div class=" modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal"><i class="fa fa-floppy-o"
+                                aria-hidden="true"></i> Update TypeRoom
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL VIEW TypeRom -->
+<div>
+    <div class="modal fade" id="viewTypeRoom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div *ngIf="typeRoomView" class="modal-body">
+                    <div class="descripcion">
+                        <div class="count-container">
+
+                            <div class="box">
+                                <h3>Name:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{typeRoomView.name}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Description:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{typeRoomView.description}}</p>
+                            </div>
+
+                            <div class="box">
+                                <h3>Number Persons:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{typeRoomView.numberPersons}}</p>
+                            </div>
+                            <div class="box">
+                                <h3>Hotel:</h3>
+                            </div>
+
+                            <div class="box">
+                                <p>{{typeRoomView.hotel.name}}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,6 +22,7 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { EventsAdminComponent } from './components/admin/events-admin/events-admin.component';
+import { TypeRoomAdminComponent } from './components/admin/type-room-admin/type-room-admin.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { EventsAdminComponent } from './components/admin/events-admin/events-adm
     AboutUsComponent,
     ContactUsComponent,
     EventsAdminComponent,
+    TypeRoomAdminComponent,
   ],
   imports: [
     BrowserModule,
